@@ -44,7 +44,6 @@ function getWeather(location) {
       humidity: "87",
       feelslike_c: "30.11",
       feelslike_f: "87.90",
-      gust_kph: "11.92",
     },
     {
       location: "Mumbai",
@@ -172,4 +171,4 @@ function getWeather(location) {
   return result;
 }
 
-console.log(getWeather("Antarctica"));
+console.log(getWeather("Delhi"));
