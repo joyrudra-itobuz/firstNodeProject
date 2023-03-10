@@ -20,6 +20,20 @@ let defaultData = {
 
 let weatherData = "";
 
+// import * as fs2 from "fs/promises";
+
+// async function readFile() {
+//   try {
+//     const data = await fs2.readFile("server.java", {
+//       encoding: "utf8",
+//     });
+//     weatherData = JSON.parse(data);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+// readFile();
+
 // fs.readFile("weatherDb.csv", (err, data) => {
 //   if (err) {
 //     console.log(err);
@@ -100,9 +114,16 @@ function editData(location, tempC, tempF, humidity) {
 editData("Agra", "45", "90", "88");
 console.log("Calling Edit : ", weatherData);
 
-fs.writeFile("weatherDb.csv", JSON.stringify(weatherData), (err, data) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log("Written!");
-});
+// fs.writeFile("weatherDb.csv", JSON.stringify(weatherData), (err, data) => {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.log("Written!");
+// });
+
+try {
+  fs.writeFileSync("weatherDb.csv", JSON.stringify(weatherData));
+  console.log("Written via Sync");
+} catch (err) {
+  console.error(err);
+}
