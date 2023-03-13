@@ -1,5 +1,9 @@
 // import * as data from "./weatherDb.mjs";
 import * as fs from "fs";
+import * as path from "path";
+
+const dbLocation = "./weatherDb.csv";
+const weatherDbPath = path.basename(dbLocation);
 
 //Global Declarations
 let defaultData = {
@@ -44,7 +48,7 @@ let weatherData = "";
 console.log("Starts!");
 
 try {
-  const data = fs.readFileSync("weatherDb.csv", "utf8");
+  const data = fs.readFileSync(path.resolve("weatherDb.csv"), "utf8");
   weatherData = JSON.parse(data);
   console.log(data);
 } catch (err) {
@@ -122,8 +126,12 @@ console.log("Calling Edit : ", weatherData);
 // });
 
 try {
-  fs.writeFileSync("weatherDb.csv", JSON.stringify(weatherData));
+  fs.writeFileSync(path.resolve("weatherDb.csv"), JSON.stringify(weatherData));
   console.log("Written via Sync");
 } catch (err) {
   console.error(err);
 }
+
+let name = "Joy";
+
+console.warn(`Danger ${name}! Danger!`);
