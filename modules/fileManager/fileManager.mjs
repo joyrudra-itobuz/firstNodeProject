@@ -12,7 +12,6 @@ import * as process from "process";
 import * as fs from "fs";
 import * as fsProm from "fs/promises";
 import * as path from "path";
-// import { Console } from "console";
 
 const curentPath = path.resolve();
 console.log(curentPath);
