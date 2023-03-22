@@ -61,7 +61,7 @@ if (userChoice === 1) {
 //Functions
 
 async function readFile(userInput, folderLocations) {
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     const folderLocation = curentPath + "/" + folderLocations + "/" + userInput;
     try {
       const data = await fsProm.readFile(folderLocation, {
@@ -88,7 +88,7 @@ async function writeFile(fileName, folderLocations, inputContent) {
   console.log(folderLocations);
   const content = inputContent;
   console.log(content);
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     const folderLocation = curentPath + "/" + folderLocations;
     console.log(folderLocation);
     try {
@@ -111,7 +111,7 @@ async function writeFile(fileName, folderLocations, inputContent) {
 }
 
 async function makeDir(userInput, folderLocations) {
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     const folderLocation = curentPath + "/" + folderLocations + "/" + userInput;
     if (!fs.existsSync(folderLocation));
     await fsProm.mkdir(folderLocation);
@@ -145,7 +145,7 @@ async function readContents(folderLocations) {
 }
 
 async function removeDir(userInput, folderLocation) {
-  if (folderLocation != 0) {
+  if (folderLocation !== 0) {
     const folderPath = curentPath + "/" + folderLocation + "/" + userInput;
     try {
       await fsProm.rmdir(folderPath);
@@ -167,7 +167,7 @@ async function removeDir(userInput, folderLocation) {
 async function createNewFile(fileName, folderLocations) {
   console.log(fileName);
   console.log(folderLocations);
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     const folderLocation = curentPath + "/" + folderLocations;
     console.log(folderLocation);
     try {
@@ -192,7 +192,7 @@ async function deleteFile(fileName, folderLocations) {
     "On Location : " + curentPath + "/" + folderLocations + "/" + fileName
   );
 
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     const folderLocation = curentPath + "/" + folderLocations + "/" + fileName;
     try {
       await fsProm.unlink(folderLocation);
