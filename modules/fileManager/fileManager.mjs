@@ -27,32 +27,32 @@ console.log("User Choice : " + userChoice);
 
 //Chcking User Input
 
-if (userChoice == 1) {
+if (userChoice === 1) {
   console.log("Read File Called!");
   const userInput = input[3];
   const folderName = input[4];
   readFile(userInput, folderName);
-} else if (userChoice == 2) {
+} else if (userChoice === 2) {
   const fileName = input[3];
   const folderName = input[4];
   const data = input[5];
   writeFile(fileName, folderName, data);
-} else if (userChoice == 3) {
+} else if (userChoice === 3) {
   const userInput = input[3];
   const folderName = input[4];
   makeDir(userInput, folderName);
-} else if (userChoice == 4) {
+} else if (userChoice === 4) {
   const folderName = input[3];
   readContents(folderName);
-} else if (userChoice == 5) {
+} else if (userChoice === 5) {
   const userInput = input[3];
   const folderName = input[4];
   removeDir(userInput, folderName);
-} else if (userChoice == 6) {
+} else if (userChoice === 6) {
   const fileName = input[3];
   const folderName = input[4];
   createNewFile(fileName, folderName);
-} else if (userChoice == 7) {
+} else if (userChoice === 7) {
   const fileName = input[3];
   const folderName = input[4];
   deleteFile(fileName, folderName);
