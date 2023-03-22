@@ -1,4 +1,3 @@
-// const e = require("express");
 const http = require("http");
 var port = 2000;
 

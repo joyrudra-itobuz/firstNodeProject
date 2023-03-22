@@ -21,7 +21,6 @@ console.log(
 );
 const input = process.argv;
 
-// console.log(input[2], input[3]);
 const userChoice = input[2];
 console.log("User Choice : " + userChoice);
 
@@ -209,5 +208,3 @@ async function deleteFile(fileName, folderLocations) {
     }
   }
 }
-
-// console.log(a);
