@@ -125,7 +125,7 @@ async function makeDir(userInput, folderLocations) {
 }
 
 async function readContents(folderLocations) {
-  if (folderLocations != "0") {
+  if (folderLocations !== "0") {
     try {
       const folderPath = curentPath + "/" + folderLocations;
       const readData = await fsProm.readdir(folderPath);
