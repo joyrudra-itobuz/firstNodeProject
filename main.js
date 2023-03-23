@@ -1,40 +1,31 @@
 const http = require("http");
-var port = 2000;
+const path = require("path");
+const fs = require("fs");
 
-const data = {
-  data: {
-    location: "kolkata",
-  },
-  name: "visal",
-  age: "OK",
-};
+let dataPath = path.resolve() + "/api/" + "weatherDb.csv";
 
-function getRoutesBasedData(route, data) {
-  let status = 200;
-  console.log("route", route);
-  return JSON.stringify({
-    apiData: data,
-    status,
-    route,
-    message: "hey i am running ...",
-  });
-}
+const port = 8080;
 
-function getRequestData(req) {
-  if (req.url === "/") {
-    return getRoutesBasedData(req.url, data);
-  } else if (req.url === "/name") {
-    return getRoutesBasedData(req.url, data);
-  } else {
-    return getRoutesBasedData("NOT FOUND", data);
+const weatherDb = JSON.parse(
+  fs.readFileSync(dataPath, { encoding: "utf-8" }, (err, data) => {
+    try {
+      return data;
+    } catch {
+      console.log(err);
+    }
+  })
+);
+
+const server = http.createServer((req, res) => {
+  try {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.write(JSON.stringify(weatherDb));
+    res.end();
+  } catch (err) {
+    console.error(err);
   }
-}
-
-const ourServer = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/txt" });
-  res.end(getRequestData(req));
 });
 
-ourServer.listen(port, () => {
-  console.log("port ... ", port);
+server.listen(port, () => {
+  console.log("Server Running on 127.0.0.1:" + port);
 });
