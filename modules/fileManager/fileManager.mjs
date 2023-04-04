@@ -8,8 +8,8 @@
 //Write File
 
 //Code Starts
-import * as process from "process";
 
+import * as process from "process";
 import * as fs from "fs/promises";
 import * as path from "path";
 
@@ -64,7 +64,8 @@ if (userChoice === "1") {
 async function readFile(userInput, folderLocations) {
   console.log("Called!");
   if (folderLocations !== "0") {
-    const folderLocation = curentPath + "/" + folderLocations + "/" + userInput;
+    const folderLocation = path.join(curentPath, folderLocations, userInput);
+
     try {
       const data = await fs.readFile(folderLocation, {
         encoding: "utf-8",
@@ -86,23 +87,22 @@ async function readFile(userInput, folderLocations) {
 }
 
 async function writeFile(fileName, folderLocations, inputContent) {
-  console.log(fileName);
-  console.log(folderLocations);
-  const content = inputContent;
-  console.log(content);
+  console.log(inputContent);
   if (folderLocations !== "0") {
-    const folderLocation = curentPath + "/" + folderLocations;
-    console.log(folderLocation);
+    const folderLocation = path.join(curentPath, folderLocations);
     try {
-      const data = await fs.writeFile(`${folderLocation}/${fileName}`, content);
-      console.log(data);
+      await fs.writeFile(
+        `${path.join(folderLocation, fileName)}`,
+        inputContent
+      );
+      console.log("Written Sucessfully : ", inputContent);
     } catch (e) {
       console.error(e);
     }
   } else {
     try {
-      const data = await fs.writeFile(path.resolve(fileName), content);
-      console.log(data);
+      await fs.writeFile(path.resolve(fileName), inputContent);
+      console.log("Written Sucessfully : ", inputContent);
     } catch (e) {
       console.error(e);
     }
@@ -111,12 +111,14 @@ async function writeFile(fileName, folderLocations, inputContent) {
 
 async function makeDir(userInput, folderLocations) {
   if (folderLocations !== "0") {
-    const folderLocation = curentPath + "/" + folderLocations + "/" + userInput;
+    const folderLocation = path.join(curentPath, folderLocations, userInput);
+
     if (!fs.existsSync(folderLocation));
     await fs.mkdir(folderLocation);
     console.log("Folder Created!");
   } else {
-    const folderPath = curentPath + "/" + userInput;
+    const folderPath = path.join(curentPath, userInput);
+
     if (!fs.existsSync(folderPath));
     await fs.mkdir(folderPath);
     console.log("Folder Created!");
@@ -126,7 +128,7 @@ async function makeDir(userInput, folderLocations) {
 async function readContents(folderLocations) {
   if (folderLocations !== "0") {
     try {
-      const folderPath = curentPath + "/" + folderLocations;
+      const folderPath = path.join(curentPath, folderLocations);
       const readData = await fs.readdir(folderPath);
       console.log(readData);
     } catch (e) {
@@ -145,7 +147,7 @@ async function readContents(folderLocations) {
 
 async function removeDir(userInput, folderLocation) {
   if (folderLocation !== 0) {
-    const folderPath = curentPath + "/" + folderLocation + "/" + userInput;
+    const folderPath = path.join(curentPath, folderLocation, userInput);
     try {
       await fs.rmdir(folderPath);
       console.log("Removed Directory");
@@ -153,7 +155,7 @@ async function removeDir(userInput, folderLocation) {
       console.error(e);
     }
   } else {
-    const folderPath = curentPath + "/" + userInput;
+    const folderPath = path.join(curentPath, userInput);
     try {
       await fs.rmdir(folderPath);
       console.log("Removed Directory");
@@ -164,21 +166,18 @@ async function removeDir(userInput, folderLocation) {
 }
 
 async function createNewFile(fileName, folderLocations) {
-  console.log(fileName);
-  console.log(folderLocations);
   if (folderLocations !== "0") {
-    const folderLocation = curentPath + "/" + folderLocations;
-    console.log(folderLocation);
+    const folderLocation = path.join(curentPath, folderLocations);
     try {
       const data = await fs.writeFile(`${folderLocation}/${fileName}`, "");
-      console.log(data);
+      console.log("Created!");
     } catch (e) {
       console.error(e);
     }
   } else {
     try {
       const data = await fs.writeFile(path.resolve(fileName), "");
-      console.log(data);
+      console.log("Created!");
     } catch (e) {
       console.error(e);
     }
@@ -192,7 +191,7 @@ async function deleteFile(fileName, folderLocations) {
   );
 
   if (folderLocations !== "0") {
-    const folderLocation = curentPath + "/" + folderLocations + "/" + fileName;
+    const folderLocation = path.join(curentPath, folderLocations, fileName);
     try {
       await fs.unlink(folderLocation);
       console.log("File Removed!");
@@ -201,7 +200,7 @@ async function deleteFile(fileName, folderLocations) {
     }
   } else {
     try {
-      await fs.unlink(`${curentPath}"/"${fileName}`);
+      await fs.unlink(`${path.join(curentPath, fileName)}`);
       console.log("File Removed!");
     } catch (e) {
       console.error(e);
